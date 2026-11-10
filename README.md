@@ -12,7 +12,7 @@ By keeping this README up-to-date,
 your team will find it easier to prepare for the final presentation
 at the end of the term.
 
-# Project Name
+# Project Name: A+ IN AFFECTION!!!
 ## Team Information
 ### Team Members
 - Name
