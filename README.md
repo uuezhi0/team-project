@@ -15,15 +15,14 @@ at the end of the term.
 # Project Name
 ## Team Information
 ### Team Members
-- Name
-- Name
-- Name
-- Name
-- Name
-- Name
+- Emma Yuezhi Liu
+- Ayesha Abdul-Cader
+- Maria Eduarda Melo Queiroz
+- David Shen
+- Yutong Rao
 ---
 ## Project Description
-### Domain
+### Entertainment
 [Project description]
 ---
 ## User Stories
