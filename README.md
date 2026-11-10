@@ -23,7 +23,10 @@ at the end of the term.
 ---
 ## Project Description
 ### Entertainment
-[Project description]
+A choice-based otome (romantic visual novel) trivia game where players can experience an interactive story
+set in a school environment! Players will meet different characters, develop relationships through dialogue
+choices and answering trivia questions, and unlock different story outcomes influenced by their decisions.
+
 ---
 ## User Stories
 ### User Story 1
