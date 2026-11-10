@@ -28,9 +28,16 @@ at the end of the term.
 ---
 ## User Stories
 ### User Story 1
+“As a player, I want to progress through dialogue and story scenes so I can progress through the narrative and learn about the characters.”
 ### User Story 2
+“As a player, I want to make dialogue choices that influence character relationships and story outcomes (player decisions have meaningful outcomes).”
 ### User Story 3
-(Add additional user stories as needed.)
+“As a player, I want to view character profiles and affection levels so I can learn more about each character and track my relationship progression towards a "win" state.”
+### User Story 4
+“As a player, I want to save and load my game progress so I can continue playing without having to restart the story.”
+### User Story 5
+“As a player, I want to do trivia quizzes in conversations with characters so I can earn affection points and unlock interactions (and “win” a character’s ending).”
+
 ---
 ## Use Cases
 ### Use Case 1
