@@ -30,15 +30,15 @@ choices and answering trivia questions, and unlock different story outcomes infl
 ---
 ## User Stories
 ### User Story 1
-“As a player, I want to progress through dialogue and story scenes so I can progress through the narrative and learn about the characters.”
+“As a user, I want to search a subject and see matching Robarts books with their call numbers, so I know what’s available on my topic.”
 ### User Story 2
-“As a player, I want to make dialogue choices that influence character relationships and story outcomes (player decisions have meaningful outcomes).”
+“As a user, I want to enter a call number like “PS3537” and see the Robarts books shelved there, so I can browse a section the way I would in person.”
 ### User Story 3
-“As a player, I want to view character profiles and affection levels so I can learn more about each character and track my relationship progression towards a "win" state.”
+“As a user, I want to see which floor a book’s call number is on, so I can go straight to the right part of the stacks.”
 ### User Story 4
-“As a player, I want to save and load my game progress so I can continue playing without having to restart the story.”
+“As a user, I want to see how many copies are on the shelf right now, so I don’t make a wasted trip.”
 ### User Story 5
-“As a player, I want to do trivia quizzes in conversations with characters so I can earn affection points and unlock interactions (and “win” a character’s ending).”
+“As a user, I want to save books to a list that’s still there next time I open the app, so I can collect sources over several visits.”
 
 ---
 ## Use Cases
