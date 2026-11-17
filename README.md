@@ -22,10 +22,11 @@ at the end of the term.
 - Yutong Rao
 ---
 ## Project Description
-### Entertainment
-A choice-based otome (romantic visual novel) trivia game where players can experience an interactive story
-set in a school environment! Players will meet different characters, develop relationships through dialogue
-choices and answering trivia questions, and unlock different story outcomes influenced by their decisions.
+### Information/Utility
+Students often know what they want to read about but not where it’s shelved, and Library of Congress call numbers are
+confusing if you’ve never used them. Shelf Finder takes a topic or call number and tells you exactly which Robarts books
+match, where they are, and whether a copy is on the shelf right now. It’s for U of T students and researchers,
+especially first-years and anyone new to Robarts, and for library staff answering “where would I find…” questions.
 
 ---
 ## User Stories
