@@ -1,8 +1,10 @@
 package app;
 
+import entity.Book;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.IOException;
@@ -11,6 +13,89 @@ import java.util.List;
 
 public class API {
     private static final String MARC_NS = "http://www.loc.gov/MARC21/slim";
+    private static final String BASE_LINK =
+      "https://ca01.alma.exlibrisgroup.com/view/sru/01UTORONTO_INST?version=1.2&operation=searchRetrieve&recordSchema=marcxml&maximumRecords=50&query=";
+
+
+    public static List<Book> get(String title, int numRecords) {
+        String url = BASE_LINK + "alma.title=\"" + title + "\"";
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                return parse(response, numRecords);
+
+
+            } else {
+                System.out.println("Request failed with code " + response.code());
+            }
+        } catch (IOException e) {
+            // A network problem (no connection, timeout, ...) — handle it gracefully.
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+
+    // --------------------------------------- HELPERS ---------------------------------------
+    /**
+     * Return the list of books from an API response of length at most numRecords
+     * @param response the response from the API call
+     * @param numRecords the maximum number of records to return
+     * @return the List of Books from the response
+     * @throws Exception If something went wrong
+     */
+    public static List<Book> parse(Response response, int numRecords) throws Exception {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true); // required!
+        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        factory.setXIncludeAware(false);
+        factory.setExpandEntityReferences(false);
+
+        Document doc = factory.newDocumentBuilder().parse(response.body().byteStream());
+
+        // Only matches the inner MARC records, not the outer SRW <record> wrappers
+        NodeList records = doc.getElementsByTagNameNS(MARC_NS, "record");
+
+        List<Book> result = new ArrayList<>();
+
+        for (int i = 0; i < records.getLength(); i++) {
+            Element record = (Element) records.item(i);
+
+
+            String mmsId = getControlField(record, "001");
+            String author    = clean(getFirst(record, "100", "a"));
+            String title     = clean(getFirst(record, "245", "a"));
+            String callNumber = clean(getFirst(record, "AVA", "d"));
+
+            String library = clean(getFirst(record, "AVA", "b"));
+            String location = clean(getFirst(record, "AVA", "j"));
+            String available = clean(getFirst(record, "AVA", "e"));
+
+            if(library.equals("ROBARTS") && location.equals("STACKS")) {
+                result.add(new Book(mmsId, title, author, callNumber));
+            }
+
+//            System.out.println("author: " + author);
+//            System.out.println("title: " + title);
+//            System.out.println("call number: " + callNumber);
+//            System.out.println("mms ID: " + mmsId);
+//            System.out.println("library: " + library);
+//            System.out.println("location: " + location);
+//            System.out.println("available: " + available);
+//            System.out.println("-----------------------------------------------------------------");
+        }
+        return result.size() > numRecords ? result.subList(0, numRecords) : result;
+    }
 
     // All <datafield> elements in a record with the given tag
     static List<Element> getDataFields(Element record, String tag) {
@@ -59,58 +144,8 @@ public class API {
 
     // Strip trailing MARC punctuation like " /", " :", ","
     static String clean(String s) {
+
         return s == null ? null : s.replaceAll("[\\s/:;,.]+$", "");
-    }
-
-    public static void parse(Response response) throws Exception {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        factory.setNamespaceAware(true); // required!
-        factory.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-        factory.setXIncludeAware(false);
-        factory.setExpandEntityReferences(false);
-
-        Document doc = factory.newDocumentBuilder().parse(response.body().byteStream());
-
-        // Only matches the inner MARC records, not the outer SRW <record> wrappers
-        NodeList records = doc.getElementsByTagNameNS(MARC_NS, "record");
-
-        for (int i = 0; i < records.getLength(); i++) {
-            Element record = (Element) records.item(i);
-
-            String isbn      = getFirst(record, "020", "a");
-            String author    = clean(getFirst(record, "100", "a"));
-            String title     = clean(getFirst(record, "245", "a"));
-            String publisher = clean(getFirst(record, "264", "b"));
-            String year      = clean(getFirst(record, "264", "c"));
-            String controlId = getControlField(record, "001");
-
-            System.out.println(title + " by " + author + " (" + publisher + ", " + year + ") ISBN " + isbn);
-
-            // For repeatable fields, loop over all of them
-            for (Element f : getDataFields(record, "035")) {
-                System.out.println("  035: " + getSubfields(f, "a"));
-            }
-        }
-    }
-
-    public static void main(String[] args){
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-                .url("https://ca01.alma.exlibrisgroup.com/view/sru/01UTORONTO_INST?version=1.2&operation=searchRetrieve&recordSchema=marcxml&query=alma.title=%22catcher%20in%20the%20rye%22%20and%20alma.creator=salinger&maximumRecords=10")
-                .build();
-
-        try (Response response = client.newCall(request).execute()) {
-            if (response.isSuccessful()) {
-                parse(response);
-            } else {
-                System.out.println("Request failed with code " + response.code());
-            }
-        } catch (IOException e) {
-            // A network problem (no connection, timeout, ...) — handle it gracefully.
-            e.printStackTrace();
-        } catch (Exception e) {
-            System.out.println("Something went wrong");
-        }
     }
 
 
