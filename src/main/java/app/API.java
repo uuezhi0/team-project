@@ -4,7 +4,6 @@ import entity.Book;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.jetbrains.annotations.Nullable;
 import org.w3c.dom.*;
 import javax.xml.parsers.*;
 import java.io.IOException;
@@ -17,7 +16,7 @@ public class API {
       "https://ca01.alma.exlibrisgroup.com/view/sru/01UTORONTO_INST?version=1.2&operation=searchRetrieve&recordSchema=marcxml&maximumRecords=50&query=";
 
 
-    public static List<Book> get(String title, int numRecords) {
+    public static List<Book> getByTitle(String title, int numRecords) {
         String url = BASE_LINK + "alma.title=\"" + title + "\"";
 
         OkHttpClient client = new OkHttpClient();
@@ -42,6 +41,30 @@ public class API {
         return null;
     }
 
+    public static List<Book> getByTopic(String topic, int numRecords) {
+        String url = BASE_LINK + "alma.subjects=\"" + topic + "\"";
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        try (Response response = client.newCall(request).execute()) {
+            if (response.isSuccessful()) {
+                return parse(response, numRecords);
+
+
+            } else {
+                System.out.println("Request failed with code " + response.code());
+            }
+        } catch (IOException e) {
+            // A network problem (no connection, timeout, ...) — handle it gracefully.
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 
 
