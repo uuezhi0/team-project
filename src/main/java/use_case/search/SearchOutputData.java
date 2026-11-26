@@ -7,10 +7,14 @@ import java.util.List;
 
 public class SearchOutputData {
 
-    List<Book> books;
+    private List<Book> books;
 
 
     public SearchOutputData(List<Book> books) {
         this.books = books;
+    }
+
+    public List<Book> getBooks() {
+        return this.books;
     }
 }

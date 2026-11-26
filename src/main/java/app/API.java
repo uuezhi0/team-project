@@ -104,7 +104,7 @@ public class API {
             String location = clean(getFirst(record, "AVA", "j"));
             String available = clean(getFirst(record, "AVA", "e"));
 
-            if(library.equals("ROBARTS") && location.equals("STACKS")) {
+            if(!(library == null || location == null) && library.equals("ROBARTS") && location.equals("STACKS")) {
                 result.add(new Book(mmsId, title, author, callNumber));
             }
 

@@ -1,7 +1,12 @@
 package app;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.search.SearchController;
+import interface_adapter.search.SearchPresenter;
 import interface_adapter.search.SearchViewModel;
+import use_case.search.SearchInputBoundary;
+import use_case.search.SearchInteractor;
+import use_case.search.SearchOutputBoundary;
 import view.SearchView;
 import view.ViewManager;
 
@@ -17,6 +22,7 @@ public class AppBuilder {
     private SearchView searchView;
     private SearchViewModel searchViewModel;
 
+
     public AppBuilder() {
         cardPanel.setLayout(cardLayout);
     }
@@ -29,15 +35,21 @@ public class AppBuilder {
         return this;
     }
     public AppBuilder addSearchUseCase() {
+        final SearchOutputBoundary searchOutputBoundary = new SearchPresenter(viewManagerModel, searchViewModel);
+        final SearchInputBoundary searchInteractor = new SearchInteractor(searchOutputBoundary);
 
-
+        SearchController searchController = new SearchController(searchInteractor);
+        searchView.setSearchController(searchController);
         return this;
+
     }
 
 
     public JFrame build() {
         final JFrame application = new JFrame("Library App");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        application.setSize(2000, 1500);
+        application.revalidate();
 
         application.add(cardPanel);
 
