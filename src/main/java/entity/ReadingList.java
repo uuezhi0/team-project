@@ -1,4 +1,4 @@
 package entity;
 
-public class wReadingList {
+public class ReadingList {
 }
