@@ -1,5 +1,5 @@
 id,prefix,start,end,subject,parentId,obsoleteStart,obsoleteEnd
-Q,Q,,,Science,false,false
+Q,Q,,,Science,"",false,false
 QA1-939,QA,1,939,Mathematics,Q,,false,false
 QA1-43,QA,1,43,General,QA1-939,false,false
 QA47-59,QA,47,59,Tables,QA1-939,false,false
