@@ -1,14 +1,14 @@
 package entity;
 
 public class Classification {
-    private String id;
-    private String prefix;
-    private double start;
-    private double end;
-    private String subject;
-    private String parentId;
-    private boolean obsoleteStart;
-    private boolean obsoleteEnd;
+    private final String id;
+    private final String prefix;
+    private final double start;
+    private final double end;
+    private final String subject;
+    private final String parentId;
+    private final boolean obsoleteStart;
+    private final boolean obsoleteEnd;
 
     public Classification(String id,
                           String prefix,
