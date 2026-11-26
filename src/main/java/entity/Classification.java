@@ -10,19 +10,22 @@ public class Classification {
     private boolean obsoleteStart;
     private boolean obsoleteEnd;
 
-    public Classification(String id, String prefix, double start, double end, String subject, String parentId) {
+    public Classification(String id,
+                          String prefix,
+                          double start,
+                          double end,
+                          String subject,
+                          String parentId,
+                          boolean obsoleteStart,
+                          boolean obsoleteEnd) {
         this.id = id;
         this.prefix = prefix;
         this.start = start;
         this.end = end;
         this.subject = subject;
         this.parentId = parentId;
-        this.obsoleteStart = false;
-        this.obsoleteEnd = false;
-    }
-
-    public boolean contains(double number) {
-        return number >= start && number <= end;
+        this.obsoleteStart = obsoleteStart;
+        this.obsoleteEnd = obsoleteEnd;
     }
 
     public String getId() {return id;}
@@ -41,5 +44,11 @@ public class Classification {
 
     public boolean isObsoleteEnd() {return obsoleteEnd;}
 
+    public boolean contains(double number) {
+        return number >= start && number <= end;
+    }
 
+    public boolean matches(String prefix, double number) {
+        return this.prefix.equals(prefix) && contains(number);
+    }
 }
