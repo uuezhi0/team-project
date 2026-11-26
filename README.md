@@ -12,7 +12,7 @@ By keeping this README up-to-date,
 your team will find it easier to prepare for the final presentation
 at the end of the term.
 
-# Project Name: A+ IN AFFECTION!!!
+# Project Name: [PROJECT NAME]
 ## Team Information
 ### Team Members
 - Emma Yuezhi Liu
@@ -31,7 +31,7 @@ especially first-years and anyone new to Robarts, and for library staff answerin
 ---
 ## User Stories
 ### User Story 1
-“As a user, I want to search a subject and see matching Robarts books with their call numbers, so I know what’s available on my topic.”
+“As a user I want to input a call number and see which classifications it falls under”
 ### User Story 2
 “As a user, I want to enter a call number like “PS3537” and see the Robarts books shelved there, so I can browse a section the way I would in person.”
 ### User Story 3
