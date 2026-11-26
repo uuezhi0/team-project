@@ -1,0 +1,17 @@
+floor,colour,start,end
+9,Blue,AC 1 A,AP 56 G
+9,Red,AP 56 H,BP 130.4 H
+9,Yellow,BP 130.4 H,D 840 B
+9,Blue,D 840 B,D 1050 E
+10,Blue,DA,DK 651 K
+10,Red,DK 651 K,DT 450.437 M
+10,Yellow,DT 450.437 R,FC
+11,Blue,G,HD 1445 B
+11,Red,HD 1445 B,HT 151 C
+11,Yellow,HT 151 E,KZD 4326
+12,Blue,L,ND 623 C
+12,Red,ND 623 C,PG 1408.2 A
+12,Yellow,PG 1408.2 A,PM
+13,Blue,PN,PQ 8259.2 V
+13,Red,PQ 8259.3 A,PS 8595 A
+13,Yellow,PS 8595 A,ZA
